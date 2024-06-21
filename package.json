@@ -1,0 +1,8 @@
+{
+  "name": "@ra1l/foundry-paratime-demo",
+  "module": "deploy/main.js",
+  "dependencies": {
+    "@oasisprotocol/sapphire-paratime": "^1.3.2",
+    "ethers": "^6.13.1"
+  }
+}

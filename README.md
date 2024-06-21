@@ -1,66 +1,52 @@
-## Foundry
+# Foundry Paratime Demo
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## Overview
 
-Foundry consists of:
+There are many differences between the Foundry runtime environment and the Hardhat runtime environment. For example, porting the LayerZero Contract repository to a Hardhat environment will fail due to its dependencies on Foundry.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+Sapphire Paratime does not have a Foundry-specific library or wrapper. Instead of creating one, this repository demonstrates how to deploy a contract with Sapphire Paratime while maintaining the core workflow in Foundry.
 
-## Documentation
+This demonstration repo was intended to be as minimal as possible in order to make it as easy as possible to port to other projects.
 
-https://book.getfoundry.sh/
+## How it works
 
-## Usage
-
-### Build
+Step 1: Configure Environment
 
 ```shell
-$ forge build
+export RPC_URL="https://testnet.sapphire.oasis.dev"
+export CONTRACT_PATH="out/Counter.sol/Counter.json"
+export DEPLOY_ARGUMENTS="404499,The Counter"
+export PRIVATE_KEY="[YOUR PRIVATE KEY HERE]"
 ```
 
-### Test
+Step 2: Build the foundry contracts
 
 ```shell
-$ forge test
+forge compile
 ```
 
-### Format
+Step 3: Run the script
 
 ```shell
-$ forge fmt
+npm install # if not installed yet
+node deploy/main.mjs
 ```
 
-### Gas Snapshots
+Step 4: Review and confirm transaction is encrypted on Oasis Network Explorer.
+
+## Integrating
+
+The `deploy/main.mjs` script uses the minimum dependencies required to deploy.
+
+If you copy the following:
 
 ```shell
-$ forge snapshot
+deploy/main.mjs
+package.json
 ```
 
-### Anvil
+Into an existing Foundry project. You should be able to run the previous steps but instead with the desired outputs.
 
-```shell
-$ anvil
-```
+---
 
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+Open an issue on Github if there are any concerns in regards to DX or Security.
